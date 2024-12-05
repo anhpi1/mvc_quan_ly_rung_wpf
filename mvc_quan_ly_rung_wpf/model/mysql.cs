@@ -14,6 +14,8 @@ using Microsoft.Windows.Themes;
 using mvc_quan_ly_rung_wpf.model;
 using mvc_quan_ly_rung_wpf.view;
 using MySql.Data.MySqlClient;
+using mvc_quan_ly_rung_wpf.controler;
+using static mvc_quan_ly_rung_wpf.controler.Program;
 public class show_danh_sach_quan_ly_hanh_chinh
 {
     string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
@@ -25,7 +27,7 @@ public class show_danh_sach_quan_ly_hanh_chinh
         _nameofid = new List<nameofid>();
         danh_sach_quan_ly = new List<tinh<List<huyen<List<xa>>>>>();
 
-       
+
         string query = "SELECT * FROM muc_do_hanh_chinh;";
 
         // Kết nối tới MySQL và thực thi truy vấn
@@ -59,7 +61,7 @@ public class show_danh_sach_quan_ly_hanh_chinh
                 MessageBox.Show($"Lỗi: {ex.Message}");
             }
         }
-        
+
         try
         {
             using (MySqlConnection conn = new MySqlConnection(connectionString))
@@ -86,10 +88,10 @@ public class show_danh_sach_quan_ly_hanh_chinh
                         muc_do_hanh_chinh_id = tinhRow.muc_do_hanh_chinh_id,
                         muc_do_hanh_chinh_name = GetNameHanhChinh(_nameofid, tinhRow.muc_do_hanh_chinh_id),
                         co_so_quan_ly_code = tinhRow.co_so_quan_ly_code,
-                        
+
                         data = new List<huyen<List<xa>>>()
                     };
-                    
+
 
                     // Lọc huyện theo tỉnh
                     var huyenForTinh = huyenList.Where(h => h.co_so_quan_ly_code == _tinh.code).ToList();
@@ -140,6 +142,7 @@ public class show_danh_sach_quan_ly_hanh_chinh
                     danh_sach_quan_ly.Add(_tinh);
                 }
             }
+            
         }
         catch (Exception ex)
         {
@@ -147,10 +150,11 @@ public class show_danh_sach_quan_ly_hanh_chinh
             var errorWindow = new ErrorWindow(errorDetails);
             errorWindow.ShowDialog(); // Hiển thị cửa sổ lỗi
         }
+        
 
 
-   
     }
+
     static string GetNameHanhChinh(List<nameofid> list, int _id)
     {
         // Tìm phần tử có id bằng _id
@@ -169,7 +173,8 @@ public class show_danh_sach_quan_ly_hanh_chinh
     {
         // Kiểm tra nếu danh sách null hoặc trống
         if (list == null || !list.Any())
-        {MessageBox.Show("Danh sách trống hoặc chưa khởi tạo.");
+        {
+            MessageBox.Show("Danh sách trống hoặc chưa khởi tạo.");
             return;
         }
 
@@ -215,7 +220,7 @@ public class show_danh_sach_quan_ly_user
         _nameofid = new List<nameofid>();
         danh_sach_quan_ly = new List<lanh_dao<List<quan_ly<List<nhan_vien>>>>>();
 
-       
+
         string query = "SELECT * FROM vai_tro_nguoi_dung;";
 
         // Kết nối tới MySQL và thực thi truy vấn
@@ -249,7 +254,7 @@ public class show_danh_sach_quan_ly_user
                 MessageBox.Show($"Lỗi: {ex.Message}");
             }
         }
-        
+
         try
         {
             using (MySqlConnection conn = new MySqlConnection(connectionString))
@@ -333,6 +338,7 @@ public class show_danh_sach_quan_ly_user
                     danh_sach_quan_ly.Add(_lanhdao); // Đảm bảo danh sách đã được khởi tạo
                 }
             }
+            
         }
         catch (Exception ex)
         {
@@ -341,11 +347,17 @@ public class show_danh_sach_quan_ly_user
             errorWindow.ShowDialog(); // Hiển thị cửa sổ lỗi
         }
 
+        var quanLy = danh_sach_quan_ly.FirstOrDefault();
+       
+            phan_quyen_cho_nguoi_dung<lanh_dao<List<quan_ly<List<nhan_vien>>>>>(quanLy, "nhan_vien33","quan_ly1" , 0, 14317);
 
 
 
-    }
-    static string GetNameuser(List<nameofid> list, int _id)
+
+
+
+        }
+        static string GetNameuser(List<nameofid> list, int _id)
     {
         // Tìm phần tử có id bằng _id
         nameofid result = list.FirstOrDefault(item => item.id == _id);
@@ -401,4 +413,93 @@ public class show_danh_sach_quan_ly_user
     }
 
 }
+public class chinh_sua_sql
+{
+    private static string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
 
+    public static void chinh_sua_mot_co_so_hanh_chinh(int id, string name, int muc_do_hanh_chinh_id, int co_so_quan_ly_code)
+    {
+        try
+        {
+            // Kết nối đến cơ sở dữ liệu
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open(); // Mở kết nối
+
+                // Câu lệnh SQL để cập nhật nhiều trường theo ID
+                string query = "UPDATE co_so_hanh_chinh SET name = @name, muc_do_hanh_chinh_id = @muc_do_hanh_chinh_id, co_so_quan_ly_code = @co_so_quan_ly_code WHERE id = @id";
+
+                // Sử dụng MySqlCommand để thực thi câu lệnh SQL
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    // Thêm tham số vào câu lệnh SQL
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@muc_do_hanh_chinh_id", muc_do_hanh_chinh_id);
+                    cmd.Parameters.AddWithValue("@co_so_quan_ly_code", co_so_quan_ly_code);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    // Thực thi câu lệnh UPDATE
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("Cập nhật thành công!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Không tìm thấy bản ghi với ID này.");
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            // Xử lý ngoại lệ
+            MessageBox.Show($"Lỗi: {ex.Message}");
+        }
+    }
+    public static void chinh_sua_mot_user(string user_name, bool is_hoat_dong, string nguoi_quan_ly_user_name, int vai_tro_nguoi_dung_id, int co_so_quan_ly_code)
+    {
+        try
+        {
+            // Kết nối đến cơ sở dữ liệu
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open(); // Mở kết nối
+
+                // Câu lệnh SQL để cập nhật nhiều trường theo user_name
+                string query = "UPDATE user SET is_hoat_dong = @is_hoat_dong, nguoi_quan_ly_user_name = @nguoi_quan_ly_user_name, vai_tro_nguoi_dung_id = @vai_tro_nguoi_dung_id, co_so_quan_ly_code = @co_so_quan_ly_code WHERE user_name = @user_name";
+
+                // Sử dụng MySqlCommand để thực thi câu lệnh SQL
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    // Thêm tham số vào câu lệnh SQL
+                    cmd.Parameters.AddWithValue("@is_hoat_dong", is_hoat_dong);
+                    cmd.Parameters.AddWithValue("@nguoi_quan_ly_user_name", nguoi_quan_ly_user_name);
+                    cmd.Parameters.AddWithValue("@vai_tro_nguoi_dung_id", vai_tro_nguoi_dung_id);
+                    cmd.Parameters.AddWithValue("@co_so_quan_ly_code", co_so_quan_ly_code);
+                    cmd.Parameters.AddWithValue("@user_name", user_name);
+
+                    // Thực thi câu lệnh UPDATE
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("Cập nhật thành công!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Không tìm thấy bản ghi với user_name này.");
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            // Xử lý ngoại lệ
+            MessageBox.Show($"Lỗi: {ex.Message}");
+        }
+    }
+
+
+}

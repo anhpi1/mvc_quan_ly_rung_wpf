@@ -33,6 +33,7 @@ namespace mvc_quan_ly_rung_wpf.view
             }
 
             lss.ItemsSource = showme.danh_sach_quan_ly;
+           
         }
         private void click1(object sender, MouseButtonEventArgs e)
         {
