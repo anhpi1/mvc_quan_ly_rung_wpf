@@ -7,65 +7,25 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <ScrollViewer VerticalScrollBarVisibility="Auto"
-                  HorizontalScrollBarVisibility="Auto">
-
-        <StackPanel>
-            <ListBox x:Name="lss">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel MouseDown="click1">
-                            <TextBlock>
-                                <TextBlock.Text>
-                                    <MultiBinding StringFormat="{}Code: {0} - Tên: {1} - Cấp: {2} - Cơ sở quản lý: {3} ">
-                                        <Binding Path="code"></Binding>
-                                        <Binding Path="name"></Binding>
-                                        <Binding Path="muc_do_hanh_chinh_name"></Binding>
-                                        <Binding Path="co_so_quan_ly_code"></Binding>
-                                    </MultiBinding>
-                                </TextBlock.Text>
-                            </TextBlock>
-                            <ListBox ItemsSource="{Binding data}"
-                                     Name="tb11"
-                                     Visibility="Collapsed">
-                                <ListBox.ItemTemplate>
+              HorizontalScrollBarVisibility="Auto">
+        <Grid>
+            <TreeView Name="TreeViewData">
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding data}">
+                        <TextBlock Text="{Binding user_name}" />
+                        <HierarchicalDataTemplate.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding data}">
+                                <TextBlock Text="{Binding user_name}" />
+                                <HierarchicalDataTemplate.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel MouseDown="click2">
-                                            <TextBlock>
-                                                <TextBlock.Text>
-                                                    <MultiBinding StringFormat="{}Code: {0} - Tên: {1} - Cấp: {2} - Cơ sở quản lý: {3} ">
-                                                        <Binding Path="code"></Binding>
-                                                        <Binding Path="name"></Binding>
-                                                        <Binding Path="muc_do_hanh_chinh_name"></Binding>
-                                                        <Binding Path="co_so_quan_ly_code"></Binding>
-                                                    </MultiBinding>
-                                                </TextBlock.Text>
-                                            </TextBlock>
-                                            <ListBox ItemsSource="{Binding data}"
-                                                     Name="tb22"
-                                                     Visibility="Collapsed">
-                                                <ListBox.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock>
-                                                            <TextBlock.Text>
-                                                                <MultiBinding StringFormat="{}Code: {0} - Tên: {1} - Cấp: {2} - Cơ sở quản lý: {3} ">
-                                                                    <Binding Path="code"></Binding>
-                                                                    <Binding Path="name"></Binding>
-                                                                    <Binding Path="muc_do_hanh_chinh_name"></Binding>
-                                                                    <Binding Path="co_so_quan_ly_code"></Binding>
-                                                                </MultiBinding>
-                                                            </TextBlock.Text>
-                                                        </TextBlock>
-                                                    </DataTemplate>
-                                                </ListBox.ItemTemplate>
-                                            </ListBox>
-                                        </StackPanel>
+                                        <TextBlock Text="{Binding user_name}" />
                                     </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </StackPanel>
+                                </HierarchicalDataTemplate.ItemTemplate>
+                            </HierarchicalDataTemplate>
+                        </HierarchicalDataTemplate.ItemTemplate>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+        </Grid>
     </ScrollViewer>
 </UserControl>

@@ -348,13 +348,6 @@ public class show_danh_sach_quan_ly_user
         }
 
         var quanLy = danh_sach_quan_ly.FirstOrDefault();
-       
-            phan_quyen_cho_nguoi_dung<lanh_dao<List<quan_ly<List<nhan_vien>>>>>(quanLy, "nhan_vien33","quan_ly1" , 0, 14317);
-
-
-
-
-
 
         }
         static string GetNameuser(List<nameofid> list, int _id)

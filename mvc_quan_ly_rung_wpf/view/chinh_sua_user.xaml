@@ -6,7 +6,34 @@
              xmlns:local="clr-namespace:mvc_quan_ly_rung_wpf.view"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <StackPanel>
+        <WrapPanel Background="Azure">
+            <TextBlock Width="200"
+                       Text="user_name"></TextBlock>
+            <TextBlock x:Name="user_name"></TextBlock>
+        </WrapPanel>
+        <WrapPanel Background="Azure">
+            <TextBlock Width="200"
+                       Text="is_hoat_dong"></TextBlock>
+            <TextBlock x:Name="is_hoat_dong"></TextBlock>
+        </WrapPanel>
+        <WrapPanel Background="Azure">
+            <TextBlock Width="200"
+                       Text="nguoi_quan_ly_user_name"></TextBlock>
+            <TextBox x:Name="nguoi_quan_ly_user_name"></TextBox>
+        </WrapPanel>
+        <WrapPanel Background="Azure">
+            <TextBlock Width="200"
+                       Text="vai_tro_nguoi_dung_id"></TextBlock>
+            <TextBox x:Name="vai_tro_nguoi_dung_id"></TextBox>
+        </WrapPanel>
+        <WrapPanel Background="Azure">
+            <TextBlock Width="200"
+                       Text="co_so_quan_ly_code"></TextBlock>
+            <TextBox x:Name="co_so_quan_ly_code"></TextBox>
+        </WrapPanel>
+    </StackPanel>
 </UserControl>
+
+
+

@@ -23,6 +23,8 @@ namespace mvc_quan_ly_rung_wpf.view
     /// </summary>
     public partial class ctrl_quan_ly_user : UserControl
     {
+        
+        
         public ctrl_quan_ly_user()
         {
             InitializeComponent();
@@ -32,32 +34,11 @@ namespace mvc_quan_ly_rung_wpf.view
                 MessageBox.Show("Danh sách quản lý trống.");
             }
 
-            lss.ItemsSource = showme.danh_sach_quan_ly;
-           
+            TreeViewData.ItemsSource = showme.danh_sach_quan_ly;
+            
+
         }
-        private void click1(object sender, MouseButtonEventArgs e)
-        {
-            StackPanel sp = sender as StackPanel;
-            if (sp != null)
-            {
-                ListBox tbx = sp.FindName("tb11") as ListBox;
-                if (tbx != null)
-                {
-                    tbx.Visibility = tbx.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
-                }
-            }
-        }
-        private void click2(object sender, MouseButtonEventArgs e)
-        {
-            StackPanel sp = sender as StackPanel;
-            if (sp != null)
-            {
-                ListBox tbx = sp.FindName("tb22") as ListBox;
-                if (tbx != null)
-                {
-                    tbx.Visibility = tbx.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
-                }
-            }
-        }
+      
+        
     }
 }

@@ -6,69 +6,23 @@
              xmlns:local="clr-namespace:mvc_quan_ly_rung_wpf.view"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <ScrollViewer VerticalScrollBarVisibility="Auto"
-                  HorizontalScrollBarVisibility="Auto">
-
-        <StackPanel>
-            <ListBox x:Name="lss">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel MouseDown="click1">
-                            <TextBlock>
-                                <TextBlock.Text>
-                                    <MultiBinding StringFormat="{}User: {0} - Trạng thái: {1} - Người quản lý: {2} - Vai trò: {3} - Cơ sở quản lý: {4} ">
-                                        <Binding Path="user_name"></Binding>
-                                        <Binding Path="is_hoat_dong"></Binding>
-                                        <Binding Path="nguoi_quan_ly_user_name"></Binding>
-                                        <Binding Path="vai_tro_nguoi_dung_name"></Binding>
-                                        <Binding Path="co_so_quan_ly_code"></Binding>
-                                    </MultiBinding>
-                                </TextBlock.Text>
-                            </TextBlock>
-                            <ListBox ItemsSource="{Binding data}"
-                                     Name="tb11"
-                                     Visibility="Collapsed">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel MouseDown="click2">
-                                            <TextBlock>
-                                                <TextBlock.Text>
-                                                    <MultiBinding StringFormat="{}User: {0} - Trạng thái: {1} - Người quản lý: {2} - Vai trò: {3} - Cơ sở quản lý: {4} ">
-                                                        <Binding Path="user_name"></Binding>
-                                                        <Binding Path="is_hoat_dong"></Binding>
-                                                        <Binding Path="nguoi_quan_ly_user_name"></Binding>
-                                                        <Binding Path="vai_tro_nguoi_dung_name"></Binding>
-                                                        <Binding Path="co_so_quan_ly_code"></Binding>
-                                                    </MultiBinding>
-                                                </TextBlock.Text>
-                                            </TextBlock>
-                                            <ListBox ItemsSource="{Binding data}"
-                                                     Name="tb22"
-                                                     Visibility="Collapsed">
-                                                <ListBox.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock>
-                                                            <TextBlock.Text>
-                                                                <MultiBinding StringFormat="{}User: {0} - Trạng thái: {1} - Người quản lý: {2} - Vai trò: {3} - Cơ sở quản lý: {4} ">
-                                                                    <Binding Path="user_name"></Binding>
-                                                                    <Binding Path="is_hoat_dong"></Binding>
-                                                                    <Binding Path="nguoi_quan_ly_user_name"></Binding>
-                                                                    <Binding Path="vai_tro_nguoi_dung_name"></Binding>
-                                                                    <Binding Path="co_so_quan_ly_code"></Binding>
-                                                                </MultiBinding>
-                                                            </TextBlock.Text>
-                                                        </TextBlock>
-                                                    </DataTemplate>
-                                                </ListBox.ItemTemplate>
-                                            </ListBox>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </StackPanel>
-    </ScrollViewer>
+    <Grid>
+        <TreeView Name="TreeViewData">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding data}">
+                    <TextBlock Text="{Binding user_name}" />
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding data}">
+                            <TextBlock Text="{Binding user_name}" />
+                            <HierarchicalDataTemplate.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding user_name}" />
+                                </DataTemplate>
+                            </HierarchicalDataTemplate.ItemTemplate>
+                        </HierarchicalDataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+    </Grid>
 </UserControl>

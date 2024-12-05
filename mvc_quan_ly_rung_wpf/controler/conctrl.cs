@@ -110,9 +110,5 @@ namespace mvc_quan_ly_rung_wpf.controler
 
             return null;
         }
-
-
-
-
     }
 }

@@ -27,36 +27,14 @@ namespace mvc_quan_ly_rung_wpf.view
         {
             InitializeComponent();
             show_danh_sach_quan_ly_hanh_chinh showme = new show_danh_sach_quan_ly_hanh_chinh();
-            if (showme.danh_sach_quan_ly == null || showme.danh_sach_quan_ly.Count == 0)
-            {
-                MessageBox.Show("Danh sách quản lý trống.");
-            }
+            TreeViewData.ItemsSource = showme.danh_sach_quan_ly;
+            
 
-            lss.ItemsSource = showme.danh_sach_quan_ly;
+
         }
-        private void click1(object sender, MouseButtonEventArgs e)
-        {
-            StackPanel sp = sender as StackPanel;
-            if (sp != null)
-            {
-                ListBox tbx = sp.FindName("tb11") as ListBox;
-                if (tbx != null)
-                {
-                    tbx.Visibility = tbx.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
-                }
-            }
-        }
-        private void click2(object sender, MouseButtonEventArgs e)
-        {
-            StackPanel sp = sender as StackPanel;
-            if (sp != null)
-            {
-                ListBox tbx = sp.FindName("tb22") as ListBox;
-                if (tbx != null)
-                {
-                    tbx.Visibility = tbx.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
-                }
-            }
-        }
+       
+
+
+        
     }
 }
