@@ -9,7 +9,7 @@
     <StackPanel>
         <Button Click="Button_Click">user</Button>
         <Button Click="Button_Click_1">co so</Button>
-        <ContentControl x:Name="myctrl" Height="400"></ContentControl>
+        <ContentControl x:Name="myctrl" Height="350"></ContentControl>
 
     </StackPanel>
 </Window>

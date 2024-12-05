@@ -48,15 +48,27 @@ namespace mvc_quan_ly_rung_wpf.view
                 // Kiểm tra kiểu dữ liệu của đối tượng
                 if (selectedItem is lanh_dao<List<quan_ly<List<nhan_vien>>>> lanhDao)
                 {
-                    MessageBox.Show ($"Lãnh Đạo: {lanhDao.user_name}");
+                    
+                    var myctrl = new chinh_sua_user(lanhDao.user_name, lanhDao.is_hoat_dong,lanhDao.nguoi_quan_ly_user_name, lanhDao.vai_tro_nguoi_dung_id, lanhDao.co_so_quan_ly_code, lanhDao,null,null);
+
+                    
+                    noi_dung.Content=myctrl;
+                    
+
                 }
                 else if (selectedItem is quan_ly<List<nhan_vien>> quanLy)
                 {
-                    MessageBox.Show ( $"Quản Lý: {quanLy.user_name}");
+
+
+                    var myctrl = new chinh_sua_user(quanLy.user_name, quanLy.is_hoat_dong, quanLy.nguoi_quan_ly_user_name, quanLy.vai_tro_nguoi_dung_id, quanLy.co_so_quan_ly_code,null,quanLy,null);
+
+                    noi_dung.Content = myctrl;
                 }
                 else if (selectedItem is nhan_vien nhanVien)
                 {
-                    MessageBox.Show($"Nhân Viên: {nhanVien.user_name}");
+                    var myctrl = new chinh_sua_user(nhanVien.user_name, nhanVien.is_hoat_dong, nhanVien.nguoi_quan_ly_user_name, nhanVien.vai_tro_nguoi_dung_id, nhanVien.co_so_quan_ly_code,null,null,nhanVien);
+
+                    noi_dung.Content = myctrl;
                 }
             }
 
