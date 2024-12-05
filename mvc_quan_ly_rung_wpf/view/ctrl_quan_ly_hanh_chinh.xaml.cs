@@ -19,30 +19,24 @@ using System.Reflection.Emit;
 namespace mvc_quan_ly_rung_wpf.view
 {
     /// <summary>
-    /// Interaction logic for myctrl.xaml
+    /// Interaction logic for ctrl_quan_ly_hanh_chinh.xaml
     /// </summary>
-    public partial class myctrl : UserControl
+    public partial class ctrl_quan_ly_hanh_chinh : UserControl
     {
-        public myctrl()
+        public ctrl_quan_ly_hanh_chinh()
         {
             InitializeComponent();
-            
-
-            show_danh_sach_quan_ly showme = new show_danh_sach_quan_ly();
+            show_danh_sach_quan_ly_hanh_chinh showme = new show_danh_sach_quan_ly_hanh_chinh();
             if (showme.danh_sach_quan_ly == null || showme.danh_sach_quan_ly.Count == 0)
             {
                 MessageBox.Show("Danh sách quản lý trống.");
             }
-            else
-            {
-                MessageBox.Show("Dữ liệu đã được load thành công.");
-            }
+
             lss.ItemsSource = showme.danh_sach_quan_ly;
         }
-
         private void click1(object sender, MouseButtonEventArgs e)
         {
-            StackPanel sp =sender as StackPanel;
+            StackPanel sp = sender as StackPanel;
             if (sp != null)
             {
                 ListBox tbx = sp.FindName("tb11") as ListBox;

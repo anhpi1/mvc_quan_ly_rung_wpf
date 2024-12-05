@@ -24,8 +24,13 @@ namespace mvc_quan_ly_rung_wpf
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            myctrl.Content = new myctrl();
+            myctrl.Content = new ctrl_quan_ly_user();
             
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            myctrl.Content = new ctrl_quan_ly_hanh_chinh();
         }
     }
 }
