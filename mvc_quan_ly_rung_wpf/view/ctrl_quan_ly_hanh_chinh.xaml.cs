@@ -32,9 +32,31 @@ namespace mvc_quan_ly_rung_wpf.view
 
 
         }
-       
+        private void TreeViewData_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            // Lấy đối tượng được chọn trong TreeView
+            var selectedItem = e.NewValue;
+
+            if (selectedItem != null)
+            {
+                // Kiểm tra kiểu dữ liệu của đối tượng
+                if (selectedItem is tinh<List<huyen<List<xa>>>> tinh)
+                {
+                    MessageBox.Show($"Lãnh Đạo: {tinh.name}");
+                }
+                else if (selectedItem is huyen<List<xa>> huyen)
+                {
+                    MessageBox.Show($"Quản Lý: {huyen.name}");
+                }
+                else if (selectedItem is xa xa)
+                {
+                    MessageBox.Show($"Nhân Viên: {xa.name}");
+                }
+            }
+
+        }
 
 
-        
+
     }
 }

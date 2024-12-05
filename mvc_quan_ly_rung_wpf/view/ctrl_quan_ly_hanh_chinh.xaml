@@ -1,24 +1,56 @@
 ﻿<UserControl x:Class="mvc_quan_ly_rung_wpf.view.ctrl_quan_ly_hanh_chinh"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:mvc_quan_ly_rung_wpf.view"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
     <ScrollViewer VerticalScrollBarVisibility="Auto"
-              HorizontalScrollBarVisibility="Auto">
+                  HorizontalScrollBarVisibility="Auto">
         <Grid>
-            <TreeView Name="TreeViewData">
+            <TreeView Name="TreeViewData"
+                      SelectedItemChanged="TreeViewData_SelectedItemChanged">
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate ItemsSource="{Binding data}">
-                        <TextBlock Text="{Binding user_name}" />
+                        <TextBlock>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}Code: {0} - Tên: {1} - Cấp: {2} - Cơ sở quản lý: {3} ">
+                                        <Binding Path="code"></Binding>
+                                        <Binding Path="name"></Binding>
+                                        <Binding Path="muc_do_hanh_chinh_name"></Binding>
+                                        <Binding Path="co_so_quan_ly_code"></Binding>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </TextBlock>
                         <HierarchicalDataTemplate.ItemTemplate>
                             <HierarchicalDataTemplate ItemsSource="{Binding data}">
-                                <TextBlock Text="{Binding user_name}" />
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}Code: {0} - Tên: {1} - Cấp: {2} - Cơ sở quản lý: {3} ">
+                                            <Binding Path="code"></Binding>
+                                            <Binding Path="name"></Binding>
+                                            <Binding Path="muc_do_hanh_chinh_name"></Binding>
+                                            <Binding Path="co_so_quan_ly_code"></Binding>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+
+                                </TextBlock>
                                 <HierarchicalDataTemplate.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding user_name}" />
+                                        <TextBlock>
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}Code: {0} - Tên: {1} - Cấp: {2} - Cơ sở quản lý: {3} ">
+                                                    <Binding Path="code"></Binding>
+                                                    <Binding Path="name"></Binding>
+                                                    <Binding Path="muc_do_hanh_chinh_name"></Binding>
+                                                    <Binding Path="co_so_quan_ly_code"></Binding>
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
                                     </DataTemplate>
                                 </HierarchicalDataTemplate.ItemTemplate>
                             </HierarchicalDataTemplate>

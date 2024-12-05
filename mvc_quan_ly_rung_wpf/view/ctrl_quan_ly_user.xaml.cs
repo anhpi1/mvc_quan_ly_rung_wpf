@@ -23,8 +23,8 @@ namespace mvc_quan_ly_rung_wpf.view
     /// </summary>
     public partial class ctrl_quan_ly_user : UserControl
     {
-        
-        
+
+
         public ctrl_quan_ly_user()
         {
             InitializeComponent();
@@ -35,10 +35,31 @@ namespace mvc_quan_ly_rung_wpf.view
             }
 
             TreeViewData.ItemsSource = showme.danh_sach_quan_ly;
-            
+
 
         }
-      
-        
+        private void TreeViewData_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            // Lấy đối tượng được chọn trong TreeView
+            var selectedItem = e.NewValue;
+
+            if (selectedItem != null)
+            {
+                // Kiểm tra kiểu dữ liệu của đối tượng
+                if (selectedItem is lanh_dao<List<quan_ly<List<nhan_vien>>>> lanhDao)
+                {
+                    MessageBox.Show ($"Lãnh Đạo: {lanhDao.user_name}");
+                }
+                else if (selectedItem is quan_ly<List<nhan_vien>> quanLy)
+                {
+                    MessageBox.Show ( $"Quản Lý: {quanLy.user_name}");
+                }
+                else if (selectedItem is nhan_vien nhanVien)
+                {
+                    MessageBox.Show($"Nhân Viên: {nhanVien.user_name}");
+                }
+            }
+
+        }
     }
 }
